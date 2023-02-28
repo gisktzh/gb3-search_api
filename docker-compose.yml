@@ -12,8 +12,6 @@ services:
   setup:
     build:
       context: setup/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
     init: true
     volumes:
       - setup:/state:Z
@@ -30,8 +28,6 @@ services:
   elasticsearch:
     build:
       context: elasticsearch/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
       - elasticsearch:/usr/share/elasticsearch/data:z
@@ -53,8 +49,6 @@ services:
   kibana:
     build:
       context: kibana/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
     ports:
