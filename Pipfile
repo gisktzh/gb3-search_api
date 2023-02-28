@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-fastapi = {extras = ["all"], version = "*"}
-elasticsearch = {extras = ["async"], version = "*"}
+fastapi = {version = "==0.92.0", extras = ["all"]}
+elasticsearch = {version = "==8.6.2", extras = ["async"]}
 
 [dev-packages]
 
