@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = {version = "==0.92.0", extras = ["all"]}
+elasticsearch = {version = "==8.6.2", extras = ["async"]}
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
