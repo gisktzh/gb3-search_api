@@ -17,5 +17,8 @@ RUN pip install pipenv && pipenv install --dev --system --deploy
 WORKDIR /app
 COPY . /app
 
+# Expose ports
+EXPOSE 8000
+
 # Start application
 CMD ["uvicorn", "main:gb3_search", "--host", "0.0.0.0", "--port", "8000"]
