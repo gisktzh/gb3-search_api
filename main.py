@@ -32,11 +32,3 @@ async def search(indexes:str, term: str):
         search_result = es.search(index=index.lower(), query=query)
         results.append(prepare_search_result_for_gb3(index, search_result))
     return results
-
-@gb3_search.get("/indexes")
-async def get_all_indexes():
-    return es.indices.get_alias(index="*")
-
-@gb3_search.post("/delete")
-async def delete_index(index: str):
-    es.indices.delete(index=index)
