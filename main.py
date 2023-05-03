@@ -6,6 +6,7 @@ import os
 
 from utils.query_builder import build_query
 from indexes.search_results import prepare_search_result_for_gb3
+from dtos.search_result import SearchResult
 
 load_dotenv()
 ELASTIC_PASSWORD = os.getenv("ELASTIC_PASSWORD")
@@ -25,7 +26,7 @@ gb3_search.add_middleware(
 )
 
 @gb3_search.get("/search")
-async def search(indexes:str, term: str):
+async def search(indexes:str, term: str) -> list[SearchResult]:
     results = []
     for index in indexes.split(","):
         query = build_query(term)
