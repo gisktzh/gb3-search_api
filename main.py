@@ -25,8 +25,9 @@ gb3_search.add_middleware(
     allow_headers=["*"],
 )
 
+
 @gb3_search.get("/search")
-async def search(indexes:str, term: str) -> list[SearchResult]:
+async def search(indexes: str, term: str) -> list[SearchResult]:
     results = []
     for index in indexes.split(","):
         query = build_query(term)
