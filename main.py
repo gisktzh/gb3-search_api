@@ -1,8 +1,12 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from elasticsearch import Elasticsearch
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
+
+from utils.query_builder import build_query
+from indexes.search_results import prepare_search_result_for_gb3
+from dtos.search_result import SearchResult
 
 load_dotenv()
 ELASTIC_PASSWORD = os.getenv("ELASTIC_PASSWORD")
@@ -21,53 +25,12 @@ gb3_search.add_middleware(
     allow_headers=["*"],
 )
 
+
 @gb3_search.get("/search")
-async def search(indexes:str, term: str):
-    output = {}
+async def search(indexes: str, term: str) -> list[SearchResult]:
     results = []
     for index in indexes.split(","):
-        if index == "fme-addresses":
-            query_body = {
-                "query":{
-                    "multi_match":{
-                        "query":term,
-                        "type":"cross_fields",
-                        "fields":[
-                            "street",
-                            "no",
-                            "town"
-                        ]
-                    }
-                }
-            }
-        elif index == "fme-places":
-            query_body = {
-                "query":{
-                    "multi_match":{
-                        "query":term,
-                        "fields":[
-                            "name"
-                        ]
-                    }
-                }
-            }
-        else:
-            raise HTTPException(status_code=404, detail=f"Search index {index} not found")
-        try:
-            search_result = es.search(index=index, body=query_body)
-            results.append(
-                {
-                    "id": index,
-                    "data": search_result
-                }
-            )
-        except Exception as e:
-            results.append(
-                {
-                    "id": index,
-                    "data": e.body
-                }
-            )
-
-    output = {"results": results}
-    return output
+        query = build_query(term)
+        search_result = es.search(index=index.lower(), query=query)
+        results.append(prepare_search_result_for_gb3(index, search_result))
+    return results
