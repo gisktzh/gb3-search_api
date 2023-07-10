@@ -33,7 +33,7 @@ The container exposes port `8000`, so a port mapping should be added.
 An example invocation looks as follows:
 
 ```shell
-docker run -p 8001:8000 -e ELASTIC_PASSWORD=123 -e ELASTIC_URL=http://localhost:9200 gb3-search-api:latest
+docker run -p 8001:8000 -e ELASTIC_PASSWORD=123 -e ELASTIC_URL=http://localhost:9200 -v search-api-logs:/var/log/apt/ gb3-search-api:latest
 ```
 
 You can then access http://localhost:8001/docs and verify that the FastAPI client is running. This works even if there
