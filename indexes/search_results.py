@@ -41,7 +41,6 @@ def get_results(index: str, search_result: ObjectApiResponse,
 def get_meta_results(index: str, search_result: ObjectApiResponse) -> SearchResult:
     matches = []
     hits = search_result["hits"]["hits"]
-    print(index)
     for hit in hits:
         hit_source = hit["_source"]
         if "geodatensatz" in index:
