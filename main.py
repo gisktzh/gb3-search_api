@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 
-from utils.query_builder import build_query, build_meta_query
+from utils.query_builder import build_query
 from indexes.search_results import prepare_search_result_for_gb3
 from dtos.search_result import SearchResult
 
@@ -30,10 +30,11 @@ gb3_search.add_middleware(
 async def search(indexes: str, term: str) -> list[SearchResult]:
     results = []
     for index in indexes.split(","):
+        query = build_query(term)
         if "meta" in index:
-            query = build_meta_query(term)
+            search_result = es.search(index=index.lower(), query=query, size=1000)
         else:
-            query = build_query(term)
-        search_result = es.search(index=index.lower(), query=query)
+            search_result = es.search(index=index.lower(), query=query)
+
         results.append(prepare_search_result_for_gb3(index, search_result))
     return results
