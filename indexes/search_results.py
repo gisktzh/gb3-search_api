@@ -1,9 +1,11 @@
 from dtos.search_result import SearchResult
 from dtos.match import Match
 from dtos.meta_match import MetaMatch
-from geojson import Point
+from geojson import GeoJSON
 from fastapi.types import Callable
 from elastic_transport import ObjectApiResponse
+from typing import Optional
+from utils.geometry_manipulation import modify_geojson_geometry
 
 
 def prepare_search_result_for_gb3(index: str, search_result: ObjectApiResponse) -> SearchResult:
@@ -29,7 +31,7 @@ def get_results(index: str, search_result: ObjectApiResponse,
             Match(
                 displayString=display_string_factory(hit_source),
                 score=hit["_score"],
-                geometry=Point(get_geometry(hit_source))
+                geometry=get_geometry(hit_source)
             )
         )
 
@@ -67,9 +69,9 @@ def get_meta_results(index: str, search_result: ObjectApiResponse) -> SearchResu
     )
 
 
-def get_geometry(hit_source: dict):
+def get_geometry(hit_source: dict) -> Optional[GeoJSON]:
     if hit_source.get("geometry"):
-        return hit_source["geometry"]
+        return modify_geojson_geometry(hit_source.get("geometry"))
 
     return None
 

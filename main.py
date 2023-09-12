@@ -11,6 +11,8 @@ from dtos.search_result import SearchResult
 load_dotenv()
 ELASTIC_PASSWORD = os.getenv("ELASTIC_PASSWORD")
 ELASTIC_URL = os.getenv("ELASTIC_URL")
+META_INDEX_IDENTIFIER = 'meta'
+META_INDEX_QUERY_SIZE = 1000 # Might need to be increased in the future if the metadata search could potentially have more hits
 
 gb3_search = FastAPI()
 es = Elasticsearch(
@@ -31,6 +33,10 @@ async def search(indexes: str, term: str) -> list[SearchResult]:
     results = []
     for index in indexes.split(","):
         query = build_query(term)
-        search_result = es.search(index=index.lower(), query=query)
+        if META_INDEX_IDENTIFIER in index:
+            search_result = es.search(index=index.lower(), query=query, size=META_INDEX_QUERY_SIZE)
+        else:
+            search_result = es.search(index=index.lower(), query=query)
+
         results.append(prepare_search_result_for_gb3(index, search_result))
     return results

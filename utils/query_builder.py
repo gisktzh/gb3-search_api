@@ -3,6 +3,7 @@ def build_query(term: str) -> dict:
         "multi_match": {
             "query": term,
             "type": "cross_fields",
-            "fields": ["*"]
+            "fields": ["*"],
+            "operator": "and"
         }
     }
