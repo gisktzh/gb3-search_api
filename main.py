@@ -12,7 +12,7 @@ load_dotenv()
 ELASTIC_PASSWORD = os.getenv("ELASTIC_PASSWORD")
 ELASTIC_URL = os.getenv("ELASTIC_URL")
 META_INDEX_IDENTIFIER = 'meta'
-META_INDEX_QUERY_SIZE = 1000
+META_INDEX_QUERY_SIZE = 1000 # Might need to be increased in the future if the metadata search could potentially have more hits
 
 gb3_search = FastAPI()
 es = Elasticsearch(
