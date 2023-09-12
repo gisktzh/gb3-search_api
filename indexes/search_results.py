@@ -4,6 +4,8 @@ from dtos.meta_match import MetaMatch
 from geojson import GeoJSON
 from fastapi.types import Callable
 from elastic_transport import ObjectApiResponse
+from typing import Optional
+from utils.geometry_manipulation import modify_geojson_geometry
 
 
 def prepare_search_result_for_gb3(index: str, search_result: ObjectApiResponse) -> SearchResult:
@@ -25,7 +27,6 @@ def get_results(index: str, search_result: ObjectApiResponse,
     hits = search_result["hits"]["hits"]
     for hit in hits:
         hit_source = hit["_source"]
-        print(hit_source)
         matches.append(
             Match(
                 displayString=display_string_factory(hit_source),
@@ -68,31 +69,12 @@ def get_meta_results(index: str, search_result: ObjectApiResponse) -> SearchResu
     )
 
 
-def get_geometry(hit_source: dict) -> GeoJSON | None:
+def get_geometry(hit_source: dict) -> Optional[GeoJSON]:
     if hit_source.get("geometry"):
         return modify_geojson_geometry(hit_source.get("geometry"))
 
     return None
 
-def modify_geojson_geometry(input_geometry: GeoJSON) -> GeoJSON:
-    print(input_geometry)
-    if input_geometry['type'] == 'MultiPoint' and len(input_geometry['coordinates']) == 1:
-        return GeoJSON({
-            "type": 'Point',
-            "coordinates": input_geometry['coordinates'][0]
-        })
-    if input_geometry['type'] == 'MultiLineString' and len(input_geometry['coordinates']) == 1:
-        return GeoJSON({
-            "type": 'LineString',
-            "coordinates": input_geometry['coordinates'][0]
-        })
-    if input_geometry['type'] == 'MultiPolygon' and len(input_geometry['coordinates']) == 1:
-        return GeoJSON({
-            "type": 'Polygon',
-            "coordinates": input_geometry['coordinates'][0]
-        })
-
-    return input_geometry
 
 def get_special_search_display(hit_source: dict) -> str:
     values = []

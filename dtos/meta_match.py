@@ -1,6 +1,7 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
 class MetaMatch(BaseModel):
-    id: str | None
+    id: Optional[str]
     score: float = -1
