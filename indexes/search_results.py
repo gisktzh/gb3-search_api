@@ -44,21 +44,9 @@ def get_meta_results(index: str, search_result: ObjectApiResponse) -> SearchResu
     matches = []
     hits = search_result["hits"]["hits"]
     for hit in hits:
-        hit_source = hit["_source"]
-        if "geodatensatz" in index:
-            id = hit_source["giszhnr"]
-        elif "gb2karten" in index:
-            id = hit_source["gb2_id"]
-        elif "product" in index:
-            id = hit_source["gdpnummer"]
-        elif "service" in index:
-            id = hit_source["gdsernummer"]
-        else:
-            id = None
-
         matches.append(
             MetaMatch(
-                id=str(id),
+                uuid=str(hit["_source"]["uuid"]),
                 score=hit["_score"]
             )
         )
