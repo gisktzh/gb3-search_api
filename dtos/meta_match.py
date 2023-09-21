@@ -3,5 +3,5 @@ from typing import Optional
 
 
 class MetaMatch(BaseModel):
-    id: Optional[str]
+    uuid: Optional[str]
     score: float = -1
