@@ -44,12 +44,14 @@ def get_meta_results(index: str, search_result: ObjectApiResponse) -> SearchResu
     matches = []
     hits = search_result["hits"]["hits"]
     for hit in hits:
-        matches.append(
-            MetaMatch(
-                uuid=str(hit["_source"]["uuid"]),
-                score=hit["_score"]
+        hit_source = hit["_source"]
+        if "uuid" in hit_source.keys():
+            matches.append(
+                MetaMatch(
+                    uuid=str(hit_source["uuid"]),
+                    score=hit["_score"]
+                )
             )
-        )
 
     return SearchResult(
         index=index,
