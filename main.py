@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from elasticsearch import Elasticsearch
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
@@ -32,6 +32,8 @@ gb3_search.add_middleware(
 async def search(indexes: str, term: str) -> list[SearchResult]:
     results = []
     for index in indexes.split(","):
+        if index == "":
+            raise HTTPException(status_code=400, detail="Empty Index")
         query = build_query(term)
         if META_INDEX_IDENTIFIER in index:
             search_result = es.search(index=index.lower(), query=query, size=META_INDEX_QUERY_SIZE)
