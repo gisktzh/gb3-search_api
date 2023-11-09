@@ -32,7 +32,7 @@ gb3_search.add_middleware(
 async def search(indexes: str, term: str) -> list[SearchResult]:
     results = []
     for index in indexes.split(","):
-        if index == "":
+        if index.strip() == "":
             raise HTTPException(status_code=400, detail="Empty Index")
         query = build_query(term)
         if META_INDEX_IDENTIFIER in index:
