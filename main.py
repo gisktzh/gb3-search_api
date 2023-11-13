@@ -9,10 +9,10 @@ from indexes.search_results import prepare_search_result_for_gb3
 from dtos.search_result import SearchResult
 
 load_dotenv()
-ELASTIC_PASSWORD = os.getenv("ELASTIC_PASSWORD")
-ELASTIC_URL = os.getenv("ELASTIC_URL")
+ELASTIC_PASSWORD = os.getenv('ELASTIC_PASSWORD')
+ELASTIC_URL = os.getenv('ELASTIC_URL')
 META_INDEX_IDENTIFIER = 'meta'
-META_INDEX_QUERY_SIZE = 10000 # Needs to be higher than the maximum number of results delivered by the metadata search
+META_INDEX_QUERY_SIZE = 10000  # Needs to be higher than the maximum number of results delivered by the metadata search
 
 gb3_search = FastAPI()
 es = Elasticsearch(

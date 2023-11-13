@@ -1,5 +1,6 @@
 from geojson import GeoJSON
 
+
 def modify_geojson_geometry(input_geometry: GeoJSON) -> GeoJSON:
     """
     Elasticsearch always returns MultiGeometries, even if it's just one Point/Line/Polygon. This function makes sure that
