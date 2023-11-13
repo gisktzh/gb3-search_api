@@ -47,3 +47,12 @@ is no backend running, so you can specify any localhost URL and spin up the cont
 
 The search API should now listen to http://localhost:8000/. Go to http://localhost:8000/docs to access the API
 documentation
+
+## Tests
+
+Tests are written using `pytest`.
+
+**Important:** Due to some architectural issues, the tests within `tests/main` cannot be run together. In isolation,
+they work well; when all are run together, only once succeeds. This is most likely an issue due to how we're using the
+client and how we're injecting elastic search (it gets no calls); so further investigation is needed to determine how we
+can reset the mock.

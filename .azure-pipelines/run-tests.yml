@@ -1,0 +1,24 @@
+trigger:
+- none # only triggered via pipelines
+
+pool:
+  vmImage: ubuntu-latest
+strategy:
+  matrix:
+    Python310:
+      python.version: '3.10'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Use Python $(python.version)'
+
+- script: |
+    python -m pip install --user pipenv
+    pipenv install
+  displayName: 'Install dependencies'
+
+- script: |
+    pipenv run pytest
+  displayName: 'pytest'
