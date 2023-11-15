@@ -1,5 +1,5 @@
 trigger:
-- none # only triggered via pipelines
+- main
 
 variables:
   - template: 'templates/variables.yml'
@@ -14,7 +14,7 @@ strategy:
 steps:
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '$(python.version)'
+    versionSpec: $(PYTHON_VERSION)
   displayName: 'Use Python $(python.version)'
 
 - script: |
@@ -23,5 +23,7 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
-    pipenv run pytest
-  displayName: 'pytest'
+    pipenv run pytest --cov --cov-report=xml
+  displayName: 'pytest with coverage'
+
+- template: 'templates/sonar-cloud-analysis.yml'
