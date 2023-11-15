@@ -1,12 +1,15 @@
 trigger:
 - none # only triggered via pipelines
 
+variables:
+  - template: 'templates/variables.yml'
+
 pool:
-  vmImage: ubuntu-latest
+  vmImage: $(VM_IMAGE)
 strategy:
   matrix:
     Python310:
-      python.version: '3.10'
+      python.version: $(PYTHON_VERSION)
 
 steps:
 - task: UsePythonVersion@0
