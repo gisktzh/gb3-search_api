@@ -32,7 +32,7 @@ gb3_search.add_middleware(
 async def search(indexes: str, term: str) -> list[SearchResult]:
     results = []
     for index in indexes.split(","):
-        print('ab')
+        print('abb')
         # https://elasticsearch-py.readthedocs.io/en/v8.10.1/api.html#elasticsearch.Elasticsearch.search
         if index.strip() == "" or "*" in index or "_all" in index:
             raise HTTPException(status_code=400, detail="Empty Index")
