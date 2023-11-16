@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "74c347d918c71672ba351f5d47ac3b986ceb69ce3d24aad04fb82151703fb63e"
+            "sha256": "af3a20aaca8c880e9a3e3fa23793a9beb75074a80cc6d947e11e1f4c512a2a25"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -337,7 +337,7 @@
                 "sha256:084458e84caa91e3ad807b68aa82c022e785bead853a3b125641a25e894a1d47",
                 "sha256:8ccbebd9a0f6f523c7db67bb54863dde8bdb93daae4ff97f7c814e0500a73e84"
             ],
-            "index": "pypi",
+            "markers": "python_version >= '3.6' and python_version < '4'",
             "version": "==8.6.2"
         },
         "email-validator": {
@@ -363,7 +363,7 @@
                 "sha256:023a0f5bd2c8b2609014d3bba1e14a1d7df96c6abea0a73070621c9862b9a4de",
                 "sha256:ae7b97c778e2f2ec3fb3cb4fb14162129411d99907fb71920f6d69a524340ebf"
             ],
-            "index": "pypi",
+            "markers": "python_version >= '3.7'",
             "version": "==0.92.0"
         },
         "frozenlist": {
@@ -435,11 +435,12 @@
         },
         "geojson": {
             "hashes": [
-                "sha256:e49df982b204ed481e4c1236c57f587adf71537301cf8faf7120ab27d73c7568",
-                "sha256:ff3d75acab60b1e66504a11f7ea12c104bad32ff3c410a807788663b966dee4a"
+                "sha256:58a7fa40727ea058efc28b0e9ff0099eadf6d0965e04690830208d3ef571adac",
+                "sha256:68a9771827237adb8c0c71f8527509c8f5bef61733aa434cefc9c9d4f0ebe8f3"
             ],
             "index": "pypi",
-            "version": "==3.0.1"
+            "markers": "python_version >= '3.7'",
+            "version": "==3.1.0"
         },
         "h11": {
             "hashes": [
@@ -800,6 +801,7 @@
                 "sha256:d989d136982de4e3b29dabcc838ad581c64e8ed52c11fbe86ddebd9da0818cd5"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.7'",
             "version": "==7.4.3"
         },
         "pytest-cov": {
@@ -808,6 +810,7 @@
                 "sha256:6ba70b9e97e69fcc3fb45bfeab2d0a138fb65c4d0d6a41ef33983ad114be8c3a"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.7'",
             "version": "==4.1.0"
         },
         "python-dotenv": {
