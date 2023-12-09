@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 fastapi = {version = "==0.104.1", extras = ["all"]}
-elasticsearch = {version = "==8.11.0", extras = ["async"]}
+elasticsearch = {version = "==8.11.1", extras = ["async"]}
 geojson = "==3.1.0"
 pytest = "==7.4.3"
 pytest-cov = "==4.1.0"
