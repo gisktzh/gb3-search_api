@@ -46,7 +46,7 @@ def test_get_geometry_if_input_has_valid_geojson():
     coordinates: list =[[0, 1]]
     mock_geometry: MultiPoint = MultiPoint(coordinates=coordinates)
 
-    mock_hit_source: dict = {"geometry": mock_geometry}
+    mock_hit_source: dict = {'geometry': mock_geometry}
 
     actual: GeoJSON = geometry_utils.get_geometry(mock_hit_source)
 
@@ -55,11 +55,12 @@ def test_get_geometry_if_input_has_valid_geojson():
 
 
 def test_get_geometry_if_input_has_valid_dict():
-    coordinates: list =[[0, 1]]
-    mock_geometry: dict = {"type": "MultiPoint", "coordinates": coordinates}
+    coordinates: list =[0, 1]
+    mock_geometry: dict = {'type': 'Point', 'coordinates': coordinates}
 
-    mock_hit_source: dict = {"geometry": mock_geometry}
-    actual: GeoJSON = geometry_utils.get_geometry(mock_hit_source)
+    mock_hit_source: dict = {'geometry': mock_geometry}
+    actual = geometry_utils.get_geometry(mock_hit_source)
 
+    assert type(actual) is GeoJSON
     assert actual['type'] == 'Point'
-    assert actual['coordinates'] == coordinates[0]
+    assert actual['coordinates'] == coordinates

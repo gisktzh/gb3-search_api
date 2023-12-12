@@ -1,9 +1,10 @@
 from geojson import GeoJSON
 from typing import Optional
 
+
 def get_geometry(hit_source: dict) -> Optional[GeoJSON]:
     if hit_source.get("geometry"):
-        return modify_geojson_geometry(hit_source.get("geometry"))
+        return modify_geojson_geometry(GeoJSON(hit_source.get("geometry")))
 
     return None
 
