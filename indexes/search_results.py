@@ -61,7 +61,7 @@ def get_meta_results(index: str, search_result: ObjectApiResponse) -> SearchResu
 
 def get_geometry(hit_source: dict) -> Optional[GeoJSON]:
     if hit_source.get("geometry"):
-        return modify_geojson_geometry(hit_source.get("geometry"))
+        return modify_geojson_geometry(GeoJSON(hit_source.get("geometry")))
 
     return None
 
