@@ -56,3 +56,12 @@ Tests are written using `pytest`.
 they work well; when all are run together, only once succeeds. This is most likely an issue due to how we're using the
 client and how we're injecting elastic search (it gets no calls); so further investigation is needed to determine how we
 can reset the mock.
+
+## Updating Python Version
+
+Make sure to update the python version in the following files to the same version:
+
+* `Dockerfile`
+* `sonar-project.properties`
+* `Pipfile`
+* `.azure-pipelines/templates/variables.yml`
