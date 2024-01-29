@@ -7,7 +7,7 @@ name = "pypi"
 fastapi = {version = "==0.109.0", extras = ["all"]}
 elasticsearch = {version = "==8.12.0", extras = ["async"]}
 geojson = "==3.1.0"
-pytest = "==7.4.4"
+pytest = "==8.0.0"
 pytest-cov = "==4.1.0"
 
 [dev-packages]
