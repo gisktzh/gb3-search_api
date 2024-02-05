@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-fastapi = {version = "==0.109.1", extras = ["all"]}
+fastapi = {version = "==0.109.2", extras = ["all"]}
 elasticsearch = {version = "==8.12.0", extras = ["async"]}
 geojson = "==3.1.0"
 pytest = "==8.0.0"
