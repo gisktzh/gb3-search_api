@@ -1,9 +1,5 @@
-def build_query(term: str) -> dict:
-    return {
-        "multi_match": {
-            "query": term,
-            "type": "cross_fields",
-            "fields": ["*"],
-            "operator": "and"
-        }
-    }
+from dtos.elasticsearch_query import ElasticsearchQuery
+
+
+def build_query(field_name: str, term: str) -> ElasticsearchQuery:
+    return ElasticsearchQuery.create_query(field_name, term)

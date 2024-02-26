@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 
 from utils.query_builder import build_query
+from utils.index_utils import get_indexed_field_name
 from indexes.search_results import prepare_search_result_for_gb3
 from dtos.search_result import SearchResult
 
@@ -35,11 +36,12 @@ async def search(indexes: str, term: str) -> list[SearchResult]:
         # https://elasticsearch-py.readthedocs.io/en/v8.10.1/api.html#elasticsearch.Elasticsearch.search
         if index.strip() == "" or "*" in index or "_all" in index:
             raise HTTPException(status_code=400, detail="Empty Index")
-        query = build_query(term)
+        field_name = get_indexed_field_name(es, index)
+        query = build_query(field_name, term)
         if META_INDEX_IDENTIFIER in index:
-            search_result = es.search(index=index.lower(), query=query, size=META_INDEX_QUERY_SIZE)
+            search_result = es.search(index=index.lower(), query=query.dict(), size=META_INDEX_QUERY_SIZE)
         else:
-            search_result = es.search(index=index.lower(), query=query)
+            search_result = es.search(index=index.lower(), query=query.dict())
 
-        results.append(prepare_search_result_for_gb3(index, search_result))
+        results.append(prepare_search_result_for_gb3(index, search_result, field_name))
     return results

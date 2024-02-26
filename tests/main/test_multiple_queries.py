@@ -10,6 +10,8 @@ import utils.query_builder
 def test_calls_elastic_search_for_each_index(es_mock: MagicMock, api_client: TestClient):
     indices = 'index-1,index-2'
     term = 'testterm'
+    field_name1 = 'index-1'
+    field_name2 = 'index-2'
 
     api_client.get(
         "/search",
@@ -19,15 +21,14 @@ def test_calls_elastic_search_for_each_index(es_mock: MagicMock, api_client: Tes
     expected_params = [
         {
             'index': 'index-1',
-            'query': utils.query_builder.build_query(term)
+            'query': utils.query_builder.build_query(field_name1, term).dict()
         },
         {
             'index': 'index-2',
-            'query': utils.query_builder.build_query(term)
+            'query': utils.query_builder.build_query(field_name2, term).dict()
         }
     ]
 
-    print(es_mock.mock_calls)
     assert es_mock.return_value.search.call_count == 2
     es_mock.return_value.search.assert_any_call(**expected_params[0])
     es_mock.return_value.search.assert_any_call(**expected_params[1])

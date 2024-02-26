@@ -10,6 +10,7 @@ import utils.query_builder
 def test_calls_elastic_search_for_each_meta_index_with_specific_size(es_mock: MagicMock, api_client: TestClient):
     index = 'meta-index'
     term = 'testterm'
+    field_name = index
 
     api_client.get(
         "/search",
@@ -18,7 +19,7 @@ def test_calls_elastic_search_for_each_meta_index_with_specific_size(es_mock: Ma
 
     expected_params = {
         'index': index,
-        'query': utils.query_builder.build_query(term),
+        'query': utils.query_builder.build_query(field_name, term).dict(),
         'size': 10000
     }
 
