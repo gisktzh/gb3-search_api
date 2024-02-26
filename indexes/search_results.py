@@ -6,17 +6,11 @@ from elastic_transport import ObjectApiResponse
 from utils.geometry_utils import get_geometry
 
 
-def prepare_search_result_for_gb3(index: str, search_result: ObjectApiResponse) -> SearchResult:
-    if index == "fme-addresses":
-        return get_results(index, search_result, lambda hit_source: f"{hit_source['street']} {hit_source['no']}, "
-                                                                    f"{hit_source['plz']} {hit_source['town']}")
-    if index == "fme-places":
-        return get_results(index, search_result, lambda hit_source: f"{hit_source['type']} {hit_source['name']}")
-
+def prepare_search_result_for_gb3(index: str, search_result: ObjectApiResponse, field_name: str) -> SearchResult:
     if "meta" in index:
         return get_meta_results(index, search_result)
 
-    return get_results(index, search_result, lambda hit_source: get_special_search_display(hit_source))
+    return get_results(index, search_result, lambda hit_source: get_display_string(hit_source[field_name]))
 
 
 def get_results(index: str, search_result: ObjectApiResponse,
@@ -55,18 +49,6 @@ def get_meta_results(index: str, search_result: ObjectApiResponse) -> SearchResu
         index=index,
         matches=matches
     )
-
-
-def get_special_search_display(hit_source: dict) -> str:
-    values = []
-    fields = [e for e in hit_source.keys() if e != 'geometry']
-    for field in fields:
-        value = hit_source[field]
-        if value is not None:
-            values.append(get_display_string(value))
-
-    return " ".join(values)
-
 
 def get_display_string(value) -> str:
     if isinstance(value, float):
