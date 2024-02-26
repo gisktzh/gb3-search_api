@@ -1,11 +1,13 @@
 from utils import query_builder
+from enums.fuzziness import Fuzziness
+from enums.query_operator import QueryOperator
 
 
 def test_generates_correct_query():
     term: str = 'This is a test string'
     field_name: str = 'index_att_test'
 
-    actual: dict = query_builder.build_query(field_name, term)
+    actual: dict = query_builder.build_query(field_name, term).dict()
 
     expected: dict = {
         "bool": {
@@ -14,8 +16,9 @@ def test_generates_correct_query():
                     "match": {
                         field_name: {
                             "query": term,
-                            "fuzziness": "AUTO",
-                            "operator": "and",
+                            "boost": 1,
+                            "fuzziness": Fuzziness.AUTO,
+                            "operator": QueryOperator.AND,
                             "analyzer": "default_search"
                         }
                     }
@@ -25,8 +28,8 @@ def test_generates_correct_query():
                         "wordstart": {
                             "query": term,
                             "boost": 3,
-                            "fuzziness": "AUTO",
-                            "operator": "and",
+                            "fuzziness": Fuzziness.AUTO,
+                            "operator": QueryOperator.AND,
                             "analyzer": "default_search"
                         }
                     }

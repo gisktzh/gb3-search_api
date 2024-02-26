@@ -21,11 +21,11 @@ def test_calls_elastic_search_for_each_index(es_mock: MagicMock, api_client: Tes
     expected_params = [
         {
             'index': 'index-1',
-            'query': utils.query_builder.build_query(field_name1, term)
+            'query': utils.query_builder.build_query(field_name1, term).dict()
         },
         {
             'index': 'index-2',
-            'query': utils.query_builder.build_query(field_name2, term)
+            'query': utils.query_builder.build_query(field_name2, term).dict()
         }
     ]
 

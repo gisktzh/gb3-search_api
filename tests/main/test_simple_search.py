@@ -17,7 +17,7 @@ def test_calls_elastic_search_with_index_and_query(es_mock: MagicMock, api_clien
 
     expected_params = {
         'index': index,
-        'query': utils.query_builder.build_query(field_name, term)
+        'query': utils.query_builder.build_query(field_name, term).dict()
     }
 
     es_mock.return_value.search.assert_called_once()

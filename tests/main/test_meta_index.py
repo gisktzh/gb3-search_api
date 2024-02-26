@@ -19,7 +19,7 @@ def test_calls_elastic_search_for_each_meta_index_with_specific_size(es_mock: Ma
 
     expected_params = {
         'index': index,
-        'query': utils.query_builder.build_query(field_name, term),
+        'query': utils.query_builder.build_query(field_name, term).dict(),
         'size': 10000
     }
 

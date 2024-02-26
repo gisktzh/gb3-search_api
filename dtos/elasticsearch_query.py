@@ -40,7 +40,7 @@ class ElasticsearchQuery(BaseModel):
         )
 
         should_item1 = ElasticsearchShouldItem(match={field_name: field1})
-        should_item2 = ElasticsearchShouldItem(match={field_name: field2})
+        should_item2 = ElasticsearchShouldItem(match={'wordstart': field2})
 
         bool_query = ElasticsearchBoolQuery(
             should=[should_item1, should_item2],
