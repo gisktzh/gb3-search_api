@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from dtos.search_result import SearchResult
 from dtos.match import Match
 from dtos.meta_match import MetaMatch
@@ -9,9 +10,10 @@ from utils.geometry_utils import get_geometry
 def prepare_search_result_for_gb3(index: str, search_result: ObjectApiResponse, field_name: str) -> SearchResult:
     if "meta" in index:
         return get_meta_results(index, search_result)
-
-    return get_results(index, search_result, lambda hit_source: get_display_string(hit_source[field_name]))
-
+    try:
+        return get_results(index, search_result, lambda hit_source: get_display_string(hit_source[field_name]))
+    except KeyError:
+        raise HTTPException(status_code=500, detail="Index is not properly configured")
 
 def get_results(index: str, search_result: ObjectApiResponse,
                 display_string_factory: Callable[dict, str]) -> SearchResult:
