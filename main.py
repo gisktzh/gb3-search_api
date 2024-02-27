@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, BackgroundTasks
 from elasticsearch import Elasticsearch
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
@@ -8,6 +8,7 @@ from utils.query_builder import build_query
 from utils.index_utils import get_indexed_field_name
 from indexes.search_results import prepare_search_result_for_gb3
 from dtos.search_result import SearchResult
+from utils.ping_elasticsearch import ping_elasticsearch
 
 load_dotenv()
 ELASTIC_PASSWORD = os.getenv('ELASTIC_PASSWORD')
@@ -27,6 +28,8 @@ gb3_search.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+BackgroundTasks.add_task(BackgroundTasks(), ping_elasticsearch(es))
 
 
 @gb3_search.get("/search")
