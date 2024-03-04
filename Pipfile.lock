@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ed8b5105bfef896b7a8b327a4ea7a4df6e1c5100912b8ff99a256650b744214d"
+            "sha256": "8c477d56bac1b211e91d48ea159a652cbc00d0bf9d2a457975897c6645fd4c26"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -688,11 +688,11 @@
         },
         "pydantic": {
             "hashes": [
-                "sha256:37a5432e54b12fecaa1049c5195f3d860a10e01bdfd24f1840ef14bd0d3aeab3",
-                "sha256:a09be1c3d28f3abe37f8a78af58284b236a92ce520105ddc91a6d29ea1176ba7"
+                "sha256:72c6034df47f46ccdf81869fddb81aade68056003900a8724a4f160700016a2a",
+                "sha256:e07805c4c7f5c6826e33a1d4c9d47950d7eaf34868e2690f8594d2e30241f11f"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==2.6.2"
+            "version": "==2.6.3"
         },
         "pydantic-core": {
             "hashes": [
@@ -781,10 +781,10 @@
         },
         "pydantic-extra-types": {
             "hashes": [
-                "sha256:46b85240093dc63ad4a8f3cab49e03d76ae0577e4f99e2bbff7d32f99d009bf9",
-                "sha256:7346873019cac32061b471adf2cdac711664ddb7a6ede04219bed2da34888c4d"
+                "sha256:d291d521c2e2bf2e6f11971caf8d639518124ae26a76d2e712599e98c4ef2b2b",
+                "sha256:e9a93cfb245158462acb76621785219f80ad112303a0a7784d2ada65e6ed6cba"
             ],
-            "version": "==2.5.0"
+            "version": "==2.6.0"
         },
         "pydantic-settings": {
             "hashes": [
@@ -795,12 +795,12 @@
         },
         "pytest": {
             "hashes": [
-                "sha256:d4051d623a2e0b7e51960ba963193b09ce6daeb9759a451844a21e4ddedfc1bd",
-                "sha256:edfaaef32ce5172d5466b5127b42e0d6d35ebbe4453f0e3505d96afd93f6b096"
+                "sha256:ee32db7af8de4629a455806befa90559f307424c07b8413ccfc30bf5b221dd7e",
+                "sha256:f8fa04ab8f98d185113ae60ea6d79c22f8143b14bc1caeced44a0ab844928323"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==8.0.2"
+            "version": "==8.1.0"
         },
         "pytest-cov": {
             "hashes": [
