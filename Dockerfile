@@ -1,7 +1,8 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3.10-slim
 
-ENV VAR1=10
+ENV SSL_KEY_FILE=key.pem
+ENV SSL_CERT_FILE=cert.pem
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -21,4 +22,4 @@ COPY . /app
 EXPOSE 8000
 
 # Start application
-CMD ["uvicorn", "main:gb3_search", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn main:gb3_search --ssl-keyfile=/certs/$SSL_KEY_FILE --ssl-certfile=/certs/$SSL_CERT_FILE --host 0.0.0.0 --port 8000"]
