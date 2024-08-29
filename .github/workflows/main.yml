@@ -19,4 +19,6 @@ jobs:
     name: Docker
     uses: ./.github/workflows/docker-dry-run.yml
 
-    # todo: sonar analysis
+  sonarcloud:
+    name: SonarCloud
+    uses: ./.github/workflows/sonar-analysis.yml
