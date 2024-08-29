@@ -1,9 +1,10 @@
 name: Analyze Code Quality
 
-on: workflow_call
-
-env:
-  PYTHON_VERSION: '3.10'
+on:
+  workflow_call:
+    secrets:
+      SONAR_TOKEN:
+        required: true
 
 jobs:
   sonarcloud:
