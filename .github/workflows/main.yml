@@ -1,0 +1,22 @@
+name: GB3 Search API
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  python:
+    name: Python
+    uses: ./.github/workflows/python-tests.yml
+
+  docker:
+    name: Docker
+    uses: ./.github/workflows/docker-dry-run.yml
+
+    # todo: sonar analysis
