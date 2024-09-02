@@ -16,7 +16,7 @@ def prepare_search_result_for_gb3(index: str, search_result: ObjectApiResponse, 
         raise HTTPException(status_code=500, detail="Index is not properly configured")
 
 def get_results(index: str, search_result: ObjectApiResponse,
-                display_string_factory: Callable[dict, str]) -> SearchResult:
+                display_string_factory: Callable[dict, str], unused: str = "") -> SearchResult:
     matches = []
     hits = search_result["hits"]["hits"]
     for hit in hits:

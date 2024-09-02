@@ -17,7 +17,7 @@ jobs:
     with:
       cache_key: python-coverage-report-${{ github.sha }}-${{ github.run_id }}
   docker:
-    name: Docker
+    name: Docker Dry Run
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
