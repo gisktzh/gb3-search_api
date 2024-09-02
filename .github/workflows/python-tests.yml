@@ -1,6 +1,12 @@
 name: Tests
 
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      cache_key:
+        description: 'Cache key for coverage report'
+        required: false
+        type: string
 
 env:
   PYTHON_VERSION: '3.10'
@@ -27,4 +33,4 @@ jobs:
         uses: actions/cache@v4
         with:
           path: coverage.xml
-          key: python-coverage-report-${{ github.sha }}-${{ github.run_id }}
+          key: ${{inputs.cache_key}}
